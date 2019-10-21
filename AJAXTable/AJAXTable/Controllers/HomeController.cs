@@ -32,6 +32,62 @@ namespace AJAXTable.Controllers
                 Name = "Nguyen Van C",
                 Salary = 4000000,
                 Status = true
+            },
+            new EmployeeModel()
+            {
+                 ID = 4,
+                Name = "Nguyen Van D",
+                Salary = 5000000,
+                Status = true
+            },
+            new EmployeeModel()
+            {
+                ID = 5,
+                Name = "Nguyen Van E",
+                Salary = 6000000,
+                Status = true
+            },
+            new EmployeeModel()
+            {
+                 ID = 6,
+                Name = "Nguyen Van F",
+                Salary = 7000000,
+                Status = true
+            },
+            new EmployeeModel()
+            {
+                ID = 7,
+                Name = "Nguyen Van G",
+                Salary = 8000000,
+                Status = true
+            },
+            new EmployeeModel()
+            {
+                 ID = 8,
+                Name = "Nguyen Van H",
+                Salary = 9000000,
+                Status = true
+            },
+            new EmployeeModel()
+            {
+                ID = 9,
+                Name = "Nguyen Van I",
+                Salary = 10000000,
+                Status = true
+            },
+            new EmployeeModel()
+            {
+                 ID = 10,
+                Name = "Nguyen Van K",
+                Salary = 1100000,
+                Status = true
+            },
+            new EmployeeModel()
+            {
+                ID = 11,
+                Name = "Nguyen Van L",
+                Salary = 1200000,
+                Status = true
             }
 
         };
@@ -42,11 +98,16 @@ namespace AJAXTable.Controllers
         }
 
         [HttpGet]
-        public JsonResult LoadData()
+        public JsonResult LoadData(int page, int pageSize = 3)
         {
+            var model = listEmployee.Skip((page - 1) * pageSize).Take(pageSize);
+            int totalRow = listEmployee.Count;
+
+
             return Json(new
             {
-                data = listEmployee,
+                data = model,
+                total = totalRow,
                 status = true
             }, JsonRequestBehavior.AllowGet);
         }
