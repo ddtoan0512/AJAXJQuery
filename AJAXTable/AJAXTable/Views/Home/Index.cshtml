@@ -1,3 +1,30 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@section scripts{
+    <script src="~/Scripts/plugins/mustache.min.js"></script>
+    <script src="~/Scripts/controllers/homeController.js"></script>
+}
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Salary</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody id="tblData"></tbody>
+    </table>
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{ID}}</td>
+        <td>{{Name}}</td>
+        <td><input type="number" class="form-control txtSalary" data-id="{{ID}}" value="{{Salary}}" /></td>
+        <td>{{{Status}}}</td>
+    </tr>
+</script>
