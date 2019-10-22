@@ -27,6 +27,38 @@ var homeController = {
         $('#btnSave').off('click').on('click', function () {
             homeController.saveData();
         });
+
+        $('.btn-edit').off('click').on('click', function () {
+            $('#modalAddUpdate').modal('show');
+            var id = $(this).data('id');
+            homeController.loadDetail(id);
+        });
+    },
+    loadDetail: function (id) {
+        $.ajax({
+            url: '/Home/GetDetail',
+            data: {
+                id: id
+            },
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                if (res.status) {
+                    var data = res.data;
+
+                    $('#hidID').val(data.ID);
+                    $('#txtName').val(data.Name);
+                    $('#txtSalary').val(data.Salary);
+                    $('#ckStatus').prop('checked', data.Status);
+                }
+                else {
+                    alert(res.message);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
     },
     loadData: function () {
         $.ajax({
@@ -89,7 +121,7 @@ var homeController = {
                     homeController.loadData();
                 }
                 else {
-                    alert(res.Message);
+                    alert(res.message);
                 }
             },
             error: function (err) {

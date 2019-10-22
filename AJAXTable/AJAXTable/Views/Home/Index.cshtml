@@ -5,7 +5,7 @@
     <script src="~/Scripts/plugins/mustache.min.js"></script>
     <script src="~/Scripts/plugins/jquery.twbsPagination.min.js"></script>
     <script src="~/Scripts/controllers/homeController.js"></script>
-
+    <script src="https://kit.fontawesome.com/1afc1c7a2e.js" crossorigin="anonymous"></script>
 }
 
 <div class="row ">
@@ -28,10 +28,21 @@
             </thead>
             <tbody id="tblData"></tbody>
         </table>
-        <div id="pagination" class="pagination">
-
-        </div>
+        <div id="pagination" class="pagination"></div>
     </div>
+    <!--Mustache-->
+    <script id="data-template" type="x-tmpl-mustache">
+        <tr>
+            <td>{{ID}}</td>
+            <td>{{Name}}</td>
+            <td><input type="number" class="form-control txtSalary" data-id="{{ID}}" value="{{Salary}}" /></td>
+            <td>{{{Status}}}</td>
+            <td>
+                <button class="btn btn-primary btn-edit" data-id="{{ID}}"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-primary btn-delete" data-id="{{ID}}"><i class="fa fa-trash"></i></button>
+            </td>
+        </tr>
+    </script>
 
 </div>
 
@@ -47,7 +58,7 @@
                 <h4 class="modal-title">Add/Update Employee</h4>
             </div>
             <div class="modal-body">
-                <form >
+                <form>
                     <div class="form-group">
                         <label for="txtName">Name: </label>
                         <input type="text" class="form-control" id="txtName">
@@ -63,19 +74,10 @@
                 </form>
             </div>
             <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
 
     </div>
 </div>
-<!--Script-->
-<script id="data-template" type="x-tmpl-mustache">
-    <tr>
-        <td>{{ID}}</td>
-        <td>{{Name}}</td>
-        <td><input type="number" class="form-control txtSalary" data-id="{{ID}}" value="{{Salary}}" /></td>
-        <td>{{{Status}}}</td>
-    </tr>
-</script>

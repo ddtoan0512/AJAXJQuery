@@ -39,6 +39,18 @@ namespace AJAXTable.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult GetDetail(int id)
+        {
+            var employee = _context.Employees.Find(id);
+
+            return Json(new
+            {
+                data = employee,
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult Update(string model)
         {
@@ -87,6 +99,7 @@ namespace AJAXTable.Controllers
                 entity.Salary = employee.Salary;
                 entity.Name = employee.Name;
                 entity.Status = employee.Status;
+
                 try
                 {
                     _context.SaveChanges();
