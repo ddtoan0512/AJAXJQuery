@@ -9,7 +9,7 @@ var homeController = {
         homeController.registerEvent();
     },
     registerEvent: function () {
-
+        // Update Salary
         $('.txtSalary').off('keypress').on('keypress', function (e) {
             if (e.which == 13) {
                 var id = $(this).data('id');
@@ -19,11 +19,13 @@ var homeController = {
             }
         });
 
+        // Show modal add new Employee
         $('#btnAddNew').off('click').on('click', function () {
             $('#modalAddUpdate').modal('show');
             homeController.resetForm();
         });
 
+        // Save Employee
         $('#btnSave').off('click').on('click', function () {
             homeController.saveData();
         });
@@ -33,6 +35,18 @@ var homeController = {
             var id = $(this).data('id');
             homeController.loadDetail(id);
         });
+
+        // Delete Employee
+        $('.btn-delete').off('click').on('click', function () {
+            console.log("1");
+            var id = $(this).data('id');
+            bootbox.confirm("Are you sure to delete this employee?", function (result) {
+                if (result) {
+                    homeController.deleteEmployee(id);
+                }
+            });
+        })
+
     },
     loadDetail: function (id) {
         $.ajax({
@@ -52,7 +66,7 @@ var homeController = {
                     $('#ckStatus').prop('checked', data.Status);
                 }
                 else {
-                    alert(res.message);
+                    bootbox.alert(res.message);
                 }
             },
             error: function (err) {
@@ -116,12 +130,13 @@ var homeController = {
             dataType: 'json',
             success: function (res) {
                 if (res.status) {
-                    alert('Save success!');
-                    $('#modalAddUpdate').modal('hide');
-                    homeController.loadData();
+                    bootbox.alert("Save success", function () {
+                        $('#modalAddUpdate').modal('hide');
+                        homeController.loadData();
+                    });
                 }
                 else {
-                    alert(res.message);
+                    bootbox.alert(res.message);
                 }
             },
             error: function (err) {
@@ -150,13 +165,28 @@ var homeController = {
             },
             success: function (res) {
                 if (res.status) {
-                    alert('Update successed. ');
+                    alert("Update Success");
                 }
                 else {
-                    alert('Update failed. ');
+                    bootbox.alert("Update failed");
                 }
             }
         })
+    },
+    deleteEmployee: function (id) {
+        $.ajax({
+            url: 'Home/Delete',
+            data: { id: id },
+            type: 'POST',
+            dataType: 'json',
+            success: function (res) {
+                if (res.status) {
+                    bootbox.alert("Delete success", function () {
+                        homeController.loadData();
+                    });
+                }
+            }
+        });
     },
     pagination: function (totalRow, callback) {
         var totalPages = Math.ceil(totalRow / homeConfig.pageSize);

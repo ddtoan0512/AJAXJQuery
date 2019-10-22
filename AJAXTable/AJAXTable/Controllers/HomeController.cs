@@ -60,11 +60,37 @@ namespace AJAXTable.Controllers
             //Save database
             var employee = _context.Employees.Find(employeeNew.ID);
             employee.Salary = employeeNew.Salary;
+            _context.SaveChanges();
 
             return Json(new
             {
                 status = true
             }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            var employee = _context.Employees.Find(id);
+            _context.Employees.Remove(employee);
+
+
+            try
+            {
+                _context.SaveChanges();
+                return Json(new
+                {
+                    status = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]
