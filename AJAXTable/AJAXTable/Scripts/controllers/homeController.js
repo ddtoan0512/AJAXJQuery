@@ -1,5 +1,5 @@
 ﻿var homeConfig = {
-    pageSize: 3,
+    pageSize: 20,
     pageIndex: 1
 }
 
@@ -17,6 +17,15 @@ var homeController = {
 
                 homeController.updateSalary(id, value);
             }
+        });
+
+        $('#btnAddNew').off('click').on('click', function () {
+            $('#modalAddUpdate').modal('show');
+            homeController.resetForm();
+        });
+
+        $('#btnSave').off('click').on('click', function () {
+            homeController.saveData();
         });
     },
     loadData: function () {
@@ -53,6 +62,47 @@ var homeController = {
             }
         })
     },
+    saveData: function () {
+        var name = $('#txtName').val();
+        var salary = parseFloat($('#txtSalary').val());
+        var status = $('#ckStatus').prop('checked');
+        var id = parseInt($('#hidID').val());
+
+        var employee = {
+            Name: name,
+            Salary: salary,
+            Status: status,
+            ID: id
+        }
+
+        $.ajax({
+            url: '/Home/SaveData',
+            data: {
+                strEmployee: JSON.stringify(employee)
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (res) {
+                if (res.status) {
+                    alert('Save success!');
+                    $('#modalAddUpdate').modal('hide');
+                    homeController.loadData();
+                }
+                else {
+                    alert(res.Message);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    },
+    resetForm: function () {
+        $('#hidID').val('0');
+        $('#txtName').val('');
+        $('#txtSalary').val(0);
+        $('#ckStatus').prop('checked', true);
+    },
     updateSalary: function (id, value) {
         var data = {
             ID: id,
@@ -88,7 +138,7 @@ var homeController = {
             pre: "Trước",
             onPageClick: function (event, page) {
                 homeConfig.pageIndex = page;
-                setTimeout(callback,200)
+                setTimeout(callback, 200)
             }
         });
     }

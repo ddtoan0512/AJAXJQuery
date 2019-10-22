@@ -1,5 +1,6 @@
 ﻿using AJAXTable.Data;
 using AJAXTable.Data.Models;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -9,7 +10,8 @@ namespace AJAXTable.Controllers
     public class HomeController : Controller
     {
         private EmployeeDbContext _context;
-        public HomeController() {
+        public HomeController()
+        {
             _context = new EmployeeDbContext();
         }
 
@@ -22,7 +24,7 @@ namespace AJAXTable.Controllers
         public JsonResult LoadData(int page, int pageSize = 3)
         {
             var model = _context.Employees
-                .OrderBy(x => x.CreatedDate)
+                .OrderByDescending(x => x.CreatedDate)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize);
 
@@ -50,6 +52,57 @@ namespace AJAXTable.Controllers
             return Json(new
             {
                 status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SaveData(string strEmployee)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Employee employee = js.Deserialize<Employee>(strEmployee);
+
+            bool status = false;
+            string Message = string.Empty;
+
+            // Add new Employee if not exist (id = 0)
+            if (employee.ID == 0)
+            {
+                employee.CreatedDate = DateTime.Now;
+                _context.Employees.Add(employee);
+                try
+                {
+                    _context.SaveChanges();
+                    status = true;
+                }
+                catch (Exception e)
+                {
+                    status = false;
+                    Message = e.Message;
+                }
+            }
+            else
+            {
+                //Update existing Employee
+                var entity = _context.Employees.Find(employee.ID);
+                entity.Salary = employee.Salary;
+                entity.Name = employee.Name;
+                entity.Status = employee.Status;
+                try
+                {
+                    _context.SaveChanges();
+                    status = true;
+                }
+                catch (Exception e)
+                {
+                    status = false;
+                    Message = e.Message;
+                }
+            }
+
+            return Json(new
+            {
+                status = status,
+                message = Message
             }, JsonRequestBehavior.AllowGet);
         }
     }
