@@ -21,14 +21,24 @@ namespace AJAXTable.Controllers
         }
 
         [HttpGet]
-        public JsonResult LoadData(int page, int pageSize = 3)
+        public JsonResult LoadData(string name, string status, int page, int pageSize = 3)
         {
-            var model = _context.Employees
-                .OrderByDescending(x => x.CreatedDate)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize);
+            IQueryable<Employee> model = _context.Employees;
 
-            int totalRow = _context.Employees.Count();
+            if (!string.IsNullOrEmpty(name))
+                model = model.Where(x => x.Name.Contains(name));
+            if (!string.IsNullOrEmpty(status))
+            {
+                var statusBool = bool.Parse(status);
+                model = model.Where(x => x.Status == statusBool);
+            }
+
+            int totalRow = model.Count();
+
+            model = model.OrderByDescending(x => x.CreatedDate)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize);
+
 
 
             return Json(new

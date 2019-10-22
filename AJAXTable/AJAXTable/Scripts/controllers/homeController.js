@@ -1,5 +1,5 @@
 ﻿var homeConfig = {
-    pageSize: 20,
+    pageSize: 5,
     pageIndex: 1
 }
 
@@ -45,6 +45,25 @@ var homeController = {
                     homeController.deleteEmployee(id);
                 }
             });
+        });
+
+        //Search Employee
+        $('#btnSearch').off('click').on('click', function () {
+            homeController.loadData(true);
+        });
+
+        $('#txtNameS').off('keypress').on('keypress', function (e) {
+            if (e.which == 13) {
+                console.log("1");
+                homeController.loadData(true);
+            }
+        });
+
+        $('#btnReset').off('click').on('click', function () {
+            console.log("1");
+            $('#txtNameS').val(" ");
+            $('#ddlStatusS').val("All");
+            homeController.loadData(true);
         })
 
     },
@@ -74,11 +93,16 @@ var homeController = {
             }
         });
     },
-    loadData: function () {
-        $.ajax({
+    loadData: function (changePageSize) {
+        var name = $('#txtNameS').val();
+        var status = $('#ddlStatusS').val();
+
+        $.ajax({    
             url: '/Home/LoadData',
             type: 'GET',
             data: {
+                name: name,
+                status: status,
                 page: homeConfig.pageIndex,
                 pageSize: homeConfig.pageSize
             },
@@ -101,7 +125,7 @@ var homeController = {
 
                     homeController.pagination(response.total, function () {
                         homeController.loadData();
-                    });
+                    }, changePageSize);
 
                     homeController.registerEvent();
                 }
@@ -132,7 +156,7 @@ var homeController = {
                 if (res.status) {
                     bootbox.alert("Save success", function () {
                         $('#modalAddUpdate').modal('hide');
-                        homeController.loadData();
+                        homeController.loadData(true);
                     });
                 }
                 else {
@@ -182,14 +206,20 @@ var homeController = {
             success: function (res) {
                 if (res.status) {
                     bootbox.alert("Delete success", function () {
-                        homeController.loadData();
+                        homeController.loadData(true);
                     });
                 }
             }
         });
     },
-    pagination: function (totalRow, callback) {
+    pagination: function (totalRow, callback, changePageSize) {
         var totalPages = Math.ceil(totalRow / homeConfig.pageSize);
+
+        if ($('#pagination a').length === 0 || changePageSize === true) {
+            $('#pagination').empty();
+            $('#pagination').removeData("twbs-pagination");
+            $('#pagination').unbind("page");
+        }
 
         $('#pagination').twbsPagination({
             totalPages: totalPages,
