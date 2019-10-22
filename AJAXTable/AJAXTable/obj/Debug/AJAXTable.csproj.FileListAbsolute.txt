@@ -54,3 +54,10 @@ D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\obj\Debug\AJAXTable.csproj.
 D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\obj\Debug\AJAXTable.csproj.CopyComplete
 D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\obj\Debug\AJAXTable.dll
 D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\obj\Debug\AJAXTable.pdb
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\bin\AJAXTable.Data.dll
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\bin\EntityFramework.dll
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\bin\EntityFramework.SqlServer.dll
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\bin\AJAXTable.Data.pdb
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\bin\AJAXTable.Data.dll.config
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\bin\EntityFramework.xml
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable\bin\EntityFramework.SqlServer.xml

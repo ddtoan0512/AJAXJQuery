@@ -1,0 +1,14 @@
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\bin\Debug\AJAXTable.Data.dll.config
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\bin\Debug\AJAXTable.Data.dll
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\bin\Debug\AJAXTable.Data.pdb
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\bin\Debug\EntityFramework.dll
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\bin\Debug\EntityFramework.xml
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\obj\Debug\AJAXTable.Data.csprojAssemblyReference.cache
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\obj\Debug\AJAXTable.Data.csproj.CoreCompileInputs.cache
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\obj\Debug\AJAXTable.Data.csproj.CopyComplete
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\obj\Debug\AJAXTable.Data.dll
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\obj\Debug\AJAXTable.Data.pdb
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\obj\Debug\AJAXTable.Data.Migrations.CreatedDB.resources
+D:\LEARN\C#\ASPdotNET\AjaxJQuery\AJAXTable\AJAXTable.Data\obj\Debug\AJAXTable.Data.csproj.GenerateResource.cache
