@@ -9,6 +9,32 @@ var homeController = {
         homeController.registerEvent();
     },
     registerEvent: function () {
+        $('#frmSaveData').validate({
+            rules: {
+                txtName: {
+                    required: true,
+                    minlength: 5,
+                },
+                txtSalary: {
+                    required: true,
+                    number: true,
+                    min: 0
+                }
+            },
+            messages: {
+                txtName: {
+                    required: "Bạn phải nhập tên",
+                    minlength: "Độ dài của tên phải lớn hơn 5 ký tự"
+                },
+                txtSalary: {
+                    required: "Bạn phải nhập lương",
+                    number: "Lương phải là số",
+                    min: "Lương của bạn phải >= 0"
+                }
+            }
+        })
+
+
         // Update Salary
         $('.txtSalary').off('keypress').on('keypress', function (e) {
             if (e.which == 13) {
@@ -27,7 +53,10 @@ var homeController = {
 
         // Save Employee
         $('#btnSave').off('click').on('click', function () {
-            homeController.saveData();
+            if ($('#frmSaveData').valid()) {
+                console.log("1");
+                homeController.saveData();
+            }
         });
 
         $('.btn-edit').off('click').on('click', function () {
@@ -97,7 +126,7 @@ var homeController = {
         var name = $('#txtNameS').val();
         var status = $('#ddlStatusS').val();
 
-        $.ajax({    
+        $.ajax({
             url: '/Home/LoadData',
             type: 'GET',
             data: {
